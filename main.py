@@ -26,7 +26,19 @@ def merge_lists(list_1, list_2) -> list:
     - Both lists are unsorted
     - Both lists can have missing values (for ex list_2 has missing id=2)
     """
-    # return list_3
+    new_list = []
+    ids = []
+    for info in list_1:
+        new_list.append(info)
+        ids.append(info['id'])
+    for info in list_2:
+        if info['id'] not in ids:
+            new_list.append(info)
+            ids.append(info['id'])
+        else:
+            # updating the appropriate dictionary by using the order of insertion.
+            new_list[ids.index(info['id'])].update(info)
+    return new_list
 
 
 list_3 = merge_lists(list_1, list_2)
